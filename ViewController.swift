@@ -73,10 +73,8 @@ class DEL {
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, APITwitterDelegate, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var searchBar: UISearchBar!
     
     var tweet: [Tweet] = []
-    
     var access_token:String?
 
     func threatTheTweets(tweet:[Tweet]) {
@@ -153,28 +151,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
     }
     
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if self.searchBar.text! == " "
-        {
-            return
-        }
-        let del = DEL(delegate: self, token: self.access_token!)
-        del.getRequest(query: self.searchBar.text!)
-        self.tableView.reloadData()
-
-    }
 
 }
 
-extension UIViewController {
-    func hideKeyboardWhenTappedAround() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    
-    func dismissKeyboard() {
-        view.endEditing(true)
-    }
 }
 
